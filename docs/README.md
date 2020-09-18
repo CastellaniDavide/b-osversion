@@ -5,21 +5,23 @@
 Get the os vesioning by a list of PC
 
 ## Required
- - python3
+ - python3 and some librerias in requirements.txt
  
 ## Directories structure
  - .github
    - ISSUE_TEMPLATE
      - bug_report.md
      - feature-request.md
-   - workflows
-     - python-test.yml
+ - workflows
+   - python-test.yml
  - bin
    - osversion.py
-   - test_osversion.py
  - docs
    - LICENSE
    - README.md
+ - flussi
+   - PC_name.csv
+   - PC_version.csv
  - log
    - trace.log
  - requirements
@@ -27,7 +29,6 @@ Get the os vesioning by a list of PC
    
 ### Execution examples
  - python3 osversion.py
- - python3 test_osversion.py
 
 # Changelog
  - [Version_1.0_2020-9-18](#Version_10_2020-9-18)
