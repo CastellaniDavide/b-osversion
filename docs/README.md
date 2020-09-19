@@ -1,11 +1,12 @@
 # osversion
-[![GitHub license](https://img.shields.io/badge/licence-GNU-green?style=flat)](https://github.com/CastellaniDavide/cpp-osversion/blob/master/LICENSE) ![Author](https://img.shields.io/badge/author-Castellani%20Davide-green?style=flat) ![Version](https://img.shields.io/badge/version-v1.0-blue?style=flat) ![Language Python](https://img.shields.io/badge/language-Python-yellowgreen?style=flat) ![sys.platform supported](https://img.shields.io/badge/OS%20platform%20supported-Linux,%20Windows%20&%20Mac%20OS-blue?style=flat) [![On GitHub](https://img.shields.io/badge/on%20GitHub-True-green?style=flat&logo=github)](https://github.com/CastellaniDavide/osversion)
+[![GitHub license](https://img.shields.io/badge/licence-GNU-green?style=flat)](https://github.com/CastellaniDavide/cpp-osversion/blob/master/LICENSE) ![Author](https://img.shields.io/badge/author-Castellani%20Davide-green?style=flat) ![Version](https://img.shields.io/badge/version-v01.01-blue?style=flat) ![Language Python](https://img.shields.io/badge/language-Python-yellowgreen?style=flat) ![sys.platform supported](https://img.shields.io/badge/OS%20platform%20supported-Linux,%20Windows%20&%20Mac%20OS-blue?style=flat) [![On GitHub](https://img.shields.io/badge/on%20GitHub-True-green?style=flat&logo=github)](https://github.com/CastellaniDavide/osversion)
 
 # Description
 Get the os vesioning by a list of PC
 
 ## Required
- - python3 and some librerias in requirements.txt
+ - python3
+ - pip3 packages (in the repo core pip3 install -r requirements/requirements.txt)
  
 ## Directories structure
  - .github
@@ -15,7 +16,7 @@ Get the os vesioning by a list of PC
  - workflows
    - python-test.yml
  - bin
-   - osversion.py
+   - **osversion.py**
  - docs
    - LICENSE
    - README.md
@@ -27,13 +28,13 @@ Get the os vesioning by a list of PC
  - requirements
    - requirements.txt
    
-### Execution examples
+### Execution examples (in bin folder)
  - python3 osversion.py
 
 # Changelog
- - [Version_1.0_2020-9-18](#Version_10_2020-9-18)
+ - [Version_01.01_2020-9-18](#Version_0101_2020-9-18)
 
-## Version_1.0_2020-9-18
+## Version_01.01_2020-9-18
  - Initial version
 
 ---

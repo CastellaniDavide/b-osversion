@@ -4,51 +4,51 @@ import os, wmi
 from datetime import datetime
 
 __author__ = "help@castellanidavide.it"
-__version__ = "1.0 2020-9-18"
+__version__ = "01.01 2020-9-18"
 
 class osversion:
-	def __init__ (self, vs=False):
+	def __init__ (self, debug=False):
 		"""The core of my project
 		"""
-		base_dir = "." if vs else ".." # the project "root" in Visual studio it is different
+		base_dir = "." if debug else ".." # the project "root" in Visual studio it is different
 
+		# Open files
 		log = open(os.path.join(base_dir, "log", "trace.log"), "a")
-		csv_init = open(os.path.join(base_dir, "flussi", "PC_name.csv"), "r")
+		csv_in = open(os.path.join(base_dir, "flussi", "PC_name.csv"), "r")
 		csv_out = open(os.path.join(base_dir, "flussi", "PC_version.csv"), "w+")
+
 		osversion.log(log, "Opened all files")
-		#osversion.init_csv(csv_client, csv_server, log)
+		osversion.init_csv(csv_in, csv_out, log)
 		
+		# Start time
 		start_time = datetime.now()
 		osversion.log(log, f"Start time: {start_time}")
 		osversion.log(log, "Running: osversion.py")
 
-		csv_out.write(csv_init.read())
+		# Core operations
+		osversion.print_OS_Info(log, csv_in, csv_out, debug)
 
-		"""conn = wmi.WMI()
-		osversion.print_client(conn, log, csv_client)
-		osversion.print_protocol(conn, log, csv_server)"""
-
+		# End
 		osversion.log(log, f"End time: {datetime.now()}\nTotal time: {datetime.now() - start_time}")
 		osversion.log(log, "")
 		log.close()
+		csv_in.close()
+		csv_out.close()
 
-	def print_client(conn, log, csv):
-		"""Prints the infos by Win32_NetworkClient
+	def print_OS_Info(log, csv_in, csv_out, debug):
+		"""Prints the infos by Win32_OperatingSystem
 		"""
-		osversion.log(log, " - Istruction: Win32_NetworkClient")
-		for network_client in conn.Win32_NetworkClient(["Caption", "Description", "Status", "Manufacturer", "Name"]):
-			print(network_client)
-			osversion.log(log, f"   - {network_client.Caption}")
-			csv.write(str(network_client.Caption) + ',' + str(network_client.Description) + ',' + str(network_client.Status) + ',' + str(network_client.Manufacturer) + ',' + str(network_client.Name) + '\n')
+		osversion.print_and_log(log, " - Get OS and OS version in:")
+		
+		# Only on the PC if debug is true, else on all PCs in the list
+		for PC_name in ("My PC, debug option",) if debug else csv_in.read().split("\n")[1:]:
+			# Establish a new connection
+			conn = wmi.WMI("" if debug else PC_name)
 
-	def print_protocol(conn, log, csv):
-		"""Prints the infos by Win32_NetworkProtocol
-		"""
-		osversion.log(log, " - Istruction: Win32_NetworkProtocol")
-		for network_protocol in conn.Win32_NetworkProtocol(["Caption", "Description", "GuaranteesDelivery", "GuaranteesSequencing", "MaximumAddressSize", "MaximumMessageSize", "Name", "SupportsConnectData", "SupportsEncryption", "SupportsEncryption", "SupportsGracefulClosing", "SupportsGuaranteedBandwidth", "SupportsQualityofService"]):
-			print(network_protocol)
-			osversion.log(log, f"   - {network_protocol.Caption}")
-			csv.write(str(network_protocol.Caption) + ',' + str(network_protocol.Description) + ',' + str(network_protocol.GuaranteesDelivery) + ',' + str(network_protocol.GuaranteesSequencing) + ',' + str(network_protocol.MaximumAddressSize) + ',' + str(network_protocol.MaximumMessageSize) + ',' + str(network_protocol.Name) + ',' + str(network_protocol.SupportsConnectData) + ',' + str(network_protocol.SupportsEncryption) + ',' + str(network_protocol.SupportsEncryption) + ',' + str(network_protocol.SupportsGracefulClosing) + ',' + str(network_protocol.SupportsGuaranteedBandwidth) + ',' + str(network_protocol.SupportsQualityofService) + '\n')
+			# Get the necessary infos
+			for os_info in conn.Win32_OperatingSystem(["Caption", "Version"]):
+				osversion.print_and_log(log, f"   - {PC_name}")
+				csv_out.write(f"{'My PC' if debug else PC_name}, {os_info.Caption}, {os_info.Version}\n")
 
 	def log(file, item):
 		"""Writes a line in the log.log file
@@ -61,16 +61,15 @@ class osversion:
 		print(item)
 		osversion.log(file, item)
 
-	def init_csv(client, server, log):
+	def init_csv(init, end, log):
 		"""Init the csv files
 		"""
-		client.write("Caption,Description,Status,Manufacturer,Name\n")
-		server.write("Caption,Description,GuaranteesDelivery,GuaranteesSequencing,MaximumAddressSize,MaximumMessageSize,Name,SupportsConnectData,SupportsEncryption,SupportsEncryption,SupportsGracefulClosing,SupportsGuaranteedBandwidth,SupportsQualityofService\n")
+		end.write("PC_name, OS, OS_version\n")
 		osversion.log(log, "csv now initialized")
 
 
 if __name__ == "__main__":
 	# debug flag
-	debug = True
+	debug = False
 
 	osversion(debug)
