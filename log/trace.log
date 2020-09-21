@@ -268,3 +268,52 @@ Running: osversion.py
 End time: 2020-09-19 16:58:16.153905
 Total time: 0:00:00.310187
 
+Opened all files
+csv now initialized
+Start time: 2020-09-21 15:26:49.945726
+Running: osversion.py
+ - Get OS and OS version in:
+   - My PC, debug option
+End time: 2020-09-21 15:26:50.091469
+Total time: 0:00:00.145743
+
+Opened all files and database connected
+Start time: 2020-09-21 16:29:26.579973
+Running: osversion.py
+csv now initialized
+database now initialized
+ - Get OS and OS version in:
+   - My PC, debug option
+End time: 2020-09-21 16:29:26.727327
+Total time: 0:00:00.147354
+
+Opened all files and database connected
+Start time: 2020-09-21 16:30:14.450275
+Running: osversion.py
+csv now initialized
+database now initialized
+ - Get OS and OS version in:
+   - My PC, debug option
+End time: 2020-09-21 16:30:14.547474
+Total time: 0:00:00.097199
+
+Opened all files and database connected
+Start time: 2020-09-21 16:30:36.847922
+Running: osversion.py
+csv now initialized
+database now initialized
+ - Get OS and OS version in:
+   - My PC, debug option
+End time: 2020-09-21 16:30:36.948011
+Total time: 0:00:00.100089
+
+Opened all files and database connected
+Start time: 2020-09-21 16:36:07.869332
+Running: osversion.py
+csv now initialized
+database now initialized
+ - Get OS and OS version in:
+   - My PC, debug option
+End time: 2020-09-21 16:36:07.983284
+Total time: 0:00:00.113952
+

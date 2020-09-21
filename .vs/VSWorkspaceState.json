@@ -2,6 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\.github",
+    "\\.github\\ISSUE_TEMPLATE",
+    "\\.github\\workflows",
     "\\bin",
     "\\docs",
     "\\flussi",
