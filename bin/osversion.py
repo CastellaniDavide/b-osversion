@@ -74,7 +74,7 @@ class osversion:
 	def init_csv(init, end, intestation, log):
 		"""Init the csv files
 		"""
-		end.write(intestation)
+		end.write(f"{intestation}\n")
 		osversion.log(log, "csv now initialized")
 
 	def init_db(db_osversion, intestation, log):
