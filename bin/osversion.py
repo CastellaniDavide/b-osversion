@@ -4,7 +4,7 @@ import os, wmi, sqlite3
 from datetime import datetime
 
 __author__ = "help@castellanidavide.it"
-__version__ = "01.01 2020-9-18"
+__version__ = "01.02 2020-9-18"
 
 class osversion:
 	def __init__ (self, debug=False):
@@ -57,8 +57,18 @@ class osversion:
 			for os_info in conn.Win32_OperatingSystem(["Caption", "Version"]):
 				osversion.print_and_log(log, f"   - {PC_name}")
 				data = f"'{'My PC' if debug else PC_name}','{os_info.Caption}','{os_info.Version}'"
-				csv_out.write(data.replace("'", ""))
+				csv_out.write(f"""{osversion.make_csv_standart(data).replace("'", '"')}\n""")
 				db_osversion.execute(f"INSERT INTO osversion VALUES ({data})")
+
+	def make_csv_standart(data):
+		"""Convert my text in csv standard to prevent errors
+		Reference: https://tools.ietf.org/html/rfc4180
+		"""
+		data.replace(",", "%x2C").replace("}%x2C{", "},{")	# make sure extra commas
+		data.replace("\"", "%x22").replace("%x22", "\"", 1).replace("%x22", "\"") # make sure extra double commas
+		data.replace("'", '"') # Use " and not ', as csv standard
+		data.encode("ASCII")
+		return data
 
 	def log(file, item):
 		"""Writes a line in the log.log file
