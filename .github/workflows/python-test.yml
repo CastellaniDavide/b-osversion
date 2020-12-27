@@ -27,4 +27,4 @@ jobs:
     - name: Test
       run: |
         cd bin
-        python3 osversion.py
+        python3.exe osversion.py
